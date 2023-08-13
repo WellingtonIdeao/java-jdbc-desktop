@@ -64,16 +64,19 @@ public class ProdutoDAO {
 		}	
 	}
 
-	public List<Produto> listar() throws SQLException {
+	public List<Produto> listar() {
 		List<Produto> produtos = new ArrayList<Produto>();
-		String sql = "SELECT ID, NOME, DESCRICAO FROM PRODUTO";
+		String sql = "SELECT id, nome, descricao FROM produto";
+		try {
+			try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+				pstm.execute();
 
-		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-			pstm.execute();
-
-			trasformarResultSetEmProduto(produtos, pstm);
-		}
-		return produtos;
+				trasformarResultSetEmProduto(produtos, pstm);
+			}
+			return produtos;
+		} catch (SQLException e){
+			throw new RuntimeException(e);
+		}	
 	}
 
 	public List<Produto> buscar(Categoria ct) throws SQLException {

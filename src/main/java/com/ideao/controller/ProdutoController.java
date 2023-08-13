@@ -1,7 +1,6 @@
 package com.ideao.controller;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.ideao.dao.ProdutoDAO;
@@ -26,11 +25,7 @@ public class ProdutoController {
 	}
 
 	public List<Produto> listar() {
-		List<Produto> produtos = 
-				new ArrayList<Produto>();
-		produtos.add(new Produto("Nome do Produto de teste"
-				, "Descrição do produto de teste"));
-		return produtos;
+		return this.produtoDAO.listar();
 	}
 
 	public void alterar(String nome, String descricao, Integer id) {
