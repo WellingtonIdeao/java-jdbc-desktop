@@ -197,7 +197,7 @@ public class ProdutoCategoriaFrame extends JFrame {
 			JOptionPane.showMessageDialog(this, "Salvo com sucesso!");
 			this.limpar();
 		} else {
-			JOptionPane.showMessageDialog(this, "Nome e Descri��o devem ser informados.");
+			JOptionPane.showMessageDialog(this, "Nome e Descrição devem ser informados.");
 		}
 	}
 

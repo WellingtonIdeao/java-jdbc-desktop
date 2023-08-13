@@ -19,41 +19,49 @@ public class ProdutoDAO {
 		this.connection = connection;
 	}
 
-	public void salvar(Produto produto) throws SQLException {
-		String sql = "INSERT INTO PRODUTO (NOME, DESCRICAO) VALUES (?, ?)";
+	public void salvar(Produto produto) {
+		try {
+			String sql = "INSERT INTO produto (nome, descricao) VALUES (?, ?)";
 
-		try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+			try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-			pstm.setString(1, produto.getNome());
-			pstm.setString(2, produto.getDescricao());
+				pstm.setString(1, produto.getNome());
+				pstm.setString(2, produto.getDescricao());
 
-			pstm.execute();
+				pstm.execute();
 
-			try (ResultSet rst = pstm.getGeneratedKeys()) {
-				while (rst.next()) {
-					produto.setId(rst.getInt(1));
+				try (ResultSet rst = pstm.getGeneratedKeys()) {
+					while (rst.next()) {
+						produto.setId(rst.getInt(1));
+					}
 				}
 			}
-		}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}	
 	}
 
-	public void salvarComCategoria(Produto produto) throws SQLException {
-		String sql = "INSERT INTO PRODUTO (NOME, DESCRICAO, CATEGORIA_ID) VALUES (?, ?, ?)";
+	public void salvarComCategoria(Produto produto) {
+		try {
+			String sql = "INSERT INTO produto (nome, descricao, categoria_id) VALUES (?, ?, ?)";
 
-		try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+			try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-			pstm.setString(1, produto.getNome());
-			pstm.setString(2, produto.getDescricao());
-			pstm.setInt(3, produto.getCategoriaId());
+				pstm.setString(1, produto.getNome());
+				pstm.setString(2, produto.getDescricao());
+				pstm.setInt(3, produto.getCategoriaId());
 
-			pstm.execute();
+				pstm.execute();
 
-			try (ResultSet rst = pstm.getGeneratedKeys()) {
-				while (rst.next()) {
-					produto.setId(rst.getInt(1));
+				try (ResultSet rst = pstm.getGeneratedKeys()) {
+					while (rst.next()) {
+						produto.setId(rst.getInt(1));
+					}
 				}
 			}
-		}
+		} catch (SQLException e){
+			throw new RuntimeException(e);
+		}	
 	}
 
 	public List<Produto> listar() throws SQLException {

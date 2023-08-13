@@ -8,7 +8,6 @@ import com.ideao.view.ProdutoCategoriaFrame;
 public class TestaOperacaoComView {
 
 	public static void main(String[] args) {
-		
 		SwingUtilities.invokeLater(() -> createAndShowGUI());
 	}
 

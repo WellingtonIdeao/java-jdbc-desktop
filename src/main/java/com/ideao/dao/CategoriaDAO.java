@@ -20,7 +20,7 @@ public class CategoriaDAO {
 
 	public List<Categoria> listar() {
 		List<Categoria> categorias = new ArrayList<>();
-		String sql = "SELECT ID, NOME FROM categoria";
+		String sql = "SELECT id, nome FROM categoria";
 		try{
 			try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 				pstm.execute();
