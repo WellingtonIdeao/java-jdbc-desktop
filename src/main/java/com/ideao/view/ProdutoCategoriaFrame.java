@@ -150,27 +150,36 @@ public class ProdutoCategoriaFrame extends JFrame {
 	}
 
 	private void alterar() {
-		Object objetoDaLinha = (Object) modelo.getValueAt(tabela.getSelectedRow(), tabela.getSelectedColumn());
-		if (objetoDaLinha instanceof Integer) {
-			Integer id = (Integer) objetoDaLinha;
-			String nome = (String) modelo.getValueAt(tabela.getSelectedRow(), 1);
-			String descricao = (String) modelo.getValueAt(tabela.getSelectedRow(), 2);
-			this.produtoController.alterar(nome, descricao, id);
-		} else {
+		try {
+			Object objetoDaLinha = (Object) modelo.getValueAt(tabela.getSelectedRow(), tabela.getSelectedColumn());
+			if (objetoDaLinha instanceof Integer) {
+				Integer id = (Integer) objetoDaLinha;
+				String nome = (String) modelo.getValueAt(tabela.getSelectedRow(), 1);
+				String descricao = (String) modelo.getValueAt(tabela.getSelectedRow(), 2);
+				this.produtoController.alterar(nome, descricao, id);
+			} else {
+				JOptionPane.showMessageDialog(this, "Por favor, selecionar o ID");
+			}
+		} catch( RuntimeException e) {
 			JOptionPane.showMessageDialog(this, "Por favor, selecionar o ID");
-		}
+		}	
 	}
 
 	private void deletar() {
-		Object objetoDaLinha = (Object) modelo.getValueAt(tabela.getSelectedRow(), tabela.getSelectedColumn());
-		if (objetoDaLinha instanceof Integer) {
-			Integer id = (Integer) objetoDaLinha;
-			this.produtoController.deletar(id);
-			modelo.removeRow(tabela.getSelectedRow());
-			JOptionPane.showMessageDialog(this, "Item excluído com sucesso!");
-		} else {
+		try {
+			Object objetoDaLinha = (Object) modelo.getValueAt(tabela.getSelectedRow(), tabela.getSelectedColumn());
+			if (objetoDaLinha instanceof Integer) {
+				Integer id = (Integer) objetoDaLinha;
+				this.produtoController.deletar(id);
+				modelo.removeRow(tabela.getSelectedRow());
+				JOptionPane.showMessageDialog(this, "Item excluído com sucesso!");
+			} else {
+				JOptionPane.showMessageDialog(this, "Por favor, selecionar o ID");
+			}
+		} catch(RuntimeException e){
 			JOptionPane.showMessageDialog(this, "Por favor, selecionar o ID");
 		}
+		
 	}
 
 	private void preencherTabela() {
