@@ -21,31 +21,27 @@ public class CategoriaDAO {
 	public List<Categoria> listar() {
 		List<Categoria> categorias = new ArrayList<>();
 		String sql = "SELECT id, nome FROM categoria";
-		try{
-			try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-				pstm.execute();
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.execute();
 
-				try (ResultSet rst = pstm.getResultSet()) {
-					while (rst.next()) {
-						Categoria categoria = new Categoria(rst.getInt(1), rst.getString(2));
-
-						categorias.add(categoria);
-					}
+			try (ResultSet rst = pstm.getResultSet()) {
+				while (rst.next()) {
+					Categoria categoria = new Categoria(rst.getInt(1), rst.getString(2));
+					categorias.add(categoria);
 				}
 			}
-			return categorias;
 		} catch (SQLException e){
 			throw new RuntimeException(e);
-		}	
-		
+		}
+		return categorias;
 	}
 
-	public List<Categoria> listarComProduto() throws SQLException {
+	public List<Categoria> listarComProduto() {
 		Categoria ultima = null;
 		List<Categoria> categorias = new ArrayList<>();
 
-		String sql = "SELECT C.ID, C.NOME, P.ID, P.NOME, P.DESCRICAO " + "FROM CATEGORIA C "
-				+ "INNER JOIN PRODUTO P ON C.ID = P.CATEGORIA_ID";
+		String sql = "SELECT C.id, C.nome, P.id, P.nome, P.descricao " + "FROM categoria C "
+				+ "INNER JOIN produto P ON C.id = P.categoria_id";
 
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.execute();
@@ -62,7 +58,10 @@ public class CategoriaDAO {
 					ultima.adicionar(produto);
 				}
 			}
-			return categorias;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
+		return categorias;
+
 	}
 }
