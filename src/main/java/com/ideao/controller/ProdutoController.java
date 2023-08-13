@@ -21,7 +21,11 @@ public class ProdutoController {
 	}
 
 	public void salvar(Produto produto) {
-		this.produtoDAO.salvarComCategoria(produto);
+		if( produto.getCategoriaId() == 0){
+			this.produtoDAO.salvar(produto);
+		} else {
+			this.produtoDAO.salvarComCategoria(produto);
+		}	
 	}
 
 	public List<Produto> listar() {
