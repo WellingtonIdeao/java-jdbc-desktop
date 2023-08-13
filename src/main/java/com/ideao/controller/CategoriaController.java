@@ -1,17 +1,23 @@
 package com.ideao.controller;
 
-import java.util.ArrayList;
+import java.sql.Connection;
 import java.util.List;
 
+import com.ideao.dao.CategoriaDAO;
+import com.ideao.factory.ConnectionFactory;
 import com.ideao.model.Categoria;
 
 
 public class CategoriaController {
 
+	private CategoriaDAO categoriaDAO;
+
+	public CategoriaController(){
+		Connection connection = new ConnectionFactory().recuperarConexao();
+		this.categoriaDAO = new CategoriaDAO(connection);
+	}
+
 	public List<Categoria> listar() {
-		List<Categoria> categorias = 
-				new ArrayList<Categoria>();
-		categorias.add(new Categoria(1, "Categoria de teste")); 
-		return categorias;
+		return this.categoriaDAO.listar();
 	}
 }

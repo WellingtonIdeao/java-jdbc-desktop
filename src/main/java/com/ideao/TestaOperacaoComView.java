@@ -5,8 +5,6 @@ import javax.swing.SwingUtilities;
 
 import com.ideao.view.ProdutoCategoriaFrame;
 
-
-
 public class TestaOperacaoComView {
 
 	public static void main(String[] args) {

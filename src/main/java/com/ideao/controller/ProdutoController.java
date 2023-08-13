@@ -19,7 +19,7 @@ public class ProdutoController {
 		List<Produto> produtos = 
 				new ArrayList<Produto>();
 		produtos.add(new Produto("Nome do Produto de teste"
-				, "Descri��o do produto de teste"));
+				, "Descrição do produto de teste"));
 		return produtos;
 	}
 
