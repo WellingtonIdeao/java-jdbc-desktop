@@ -17,7 +17,7 @@ public class ProdutoController {
 	}
 
 	public void deletar(Integer id) {
-		System.out.println("Deletando produto");
+		this.produtoDAO.deletar(id);
 	}
 
 	public void salvar(Produto produto) {
@@ -29,6 +29,6 @@ public class ProdutoController {
 	}
 
 	public void alterar(String nome, String descricao, Integer id) {
-		System.out.println("Alterando produto");
+		this.produtoDAO.alterar(nome, descricao, id);
 	}
 }

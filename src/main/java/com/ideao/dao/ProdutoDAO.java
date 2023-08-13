@@ -92,20 +92,24 @@ public class ProdutoDAO {
 		return produtos;
 	}
 
-	public void deletar(Integer id) throws SQLException {
-		try (PreparedStatement stm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID = ?")) {
+	public void deletar(Integer id) {
+		try (PreparedStatement stm = connection.prepareStatement("DELETE FROM produto WHERE id = ?")) {
 			stm.setInt(1, id);
 			stm.execute();
+		}catch (SQLException e){
+			throw new RuntimeException(e);
 		}
 	}
 
-	public void alterar(String nome, String descricao, Integer id) throws SQLException {
+	public void alterar(String nome, String descricao, Integer id) {
 		try (PreparedStatement stm = connection
-				.prepareStatement("UPDATE PRODUTO P SET P.NOME = ?, P.DESCRICAO = ? WHERE ID = ?")) {
+				.prepareStatement("UPDATE produto P SET P.nome = ?, P.descricao = ? WHERE id = ?")) {
 			stm.setString(1, nome);
 			stm.setString(2, descricao);
 			stm.setInt(3, id);
 			stm.execute();
+		} catch( SQLException e){
+			throw new RuntimeException(e);
 		}
 	}
 
